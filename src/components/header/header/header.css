@@ -1,0 +1,16 @@
+/* Add this to your CSS file or style section */
+.text span {
+    display: flex;
+    align-items: center;
+  }
+  
+  .text-danger .FaShoppingCart {
+    margin-right: 5px; /* Adjust the margin as needed */
+  }
+  .bgf{
+    background-color: rgb(67, 67, 77);
+
+  }
+  
+ 
+  

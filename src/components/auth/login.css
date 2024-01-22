@@ -1,0 +1,67 @@
+.main {
+    padding: 20px;
+  }
+  
+  .main_div {
+    display: flex;
+    background-color: #ddf4fe;
+    padding: 40px;
+    border-radius: 10px;
+  }
+  
+  .flex_main {
+    padding: 40px;
+    border-radius: 10px;
+    background-color: white;
+    width: 100%;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  /* Apply changes below 880px */
+@media (max-width: 880px) {
+    .flex {
+        flex-direction: column-reverse;  /* Change direction to column below 880px */
+    }
+  
+    .flex_first {
+      margin-right: 0; /* No margin on the right when in column layout */
+    }
+  }
+  .flex_first,
+  .flex_second {
+    flex: 1;
+  }
+  
+  /* Add this if you want to maintain some space between flex_first and flex_second */
+  .flex_first {
+    
+    /* Center content vertically */
+    margin-right: 10px;
+  }
+  .input{
+    padding: 10px;
+    border-radius: 40px;
+    width: 300px;
+    border: 1px solid #5138ee;
+  }
+  .button{
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 40px;
+    width: 300px;
+    border: 1px solid #5138ee;
+    background-color: #5138ee;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+  }
+  img{
+    width: 100%;
+    height: 500px;
+  }
+  label{
+    font-weight: 600;
+    font-size: larger;
+  }
