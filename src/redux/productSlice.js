@@ -9,9 +9,9 @@ export const fetchProducts = createAsyncThunk('product/fetchProducts', async () 
 });
 
 // Define an async thunk for adding a product
-export const addProduct = createAsyncThunk('product/addProduct', async ({ categoryName, productName }) => {
+export const addProduct = createAsyncThunk('product/addProduct', async ({ categoryName, productName ,price}) => {
     console.log("slice", categoryName, productName)
-    const response = await axios.post('http://localhost:8000/admin/product', { categoryName, productName });
+    const response = await axios.post('http://localhost:8000/admin/product', { categoryName, productName,price });
     return response.data;
   });
   
@@ -23,8 +23,8 @@ export const deleteProduct = createAsyncThunk('product/deleteProduct', async (pr
 });
 
 // Define an async thunk for updating a product by ID
-export const updateProduct = createAsyncThunk('product/updateProduct', async ({ productId, productName ,categoryName}) => {
-  const response = await axios.put(`http://localhost:8000/admin/productUpdate/${productId}`, { productName,categoryName });
+export const updateProduct = createAsyncThunk('product/updateProduct', async ({ productId, productName ,categoryName,price}) => {
+  const response = await axios.put(`http://localhost:8000/admin/productUpdate/${productId}`, { productName,categoryName,price });
   return response.data;
 });
 

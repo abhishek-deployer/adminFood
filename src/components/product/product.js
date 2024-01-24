@@ -12,6 +12,7 @@ import axios from "axios";
 import { fetchCategories } from "../../redux/categorySlice";
 const Product = () => {
   const dispatch = useDispatch();
+  const [price,setPrice]=useState()
   const categoryList = useSelector((store) => store.category.list);
   const productList = useSelector((store) => store.product.list);
   const [products, setProducts] = useState([]);
@@ -36,23 +37,24 @@ const Product = () => {
 
   const handleSaveProduct = () => {
     console.log(newProduct, selectedCategory)
-    dispatch(addProduct({ categoryName: selectedCategory, productName: newProduct }));
+    dispatch(addProduct({ categoryName: selectedCategory, productName: newProduct,price:price }));
     handleCloseModal();
   };
   
 
   const handleEditProductSave = () => {
     dispatch(
-      updateProduct({ productId: editId, productName: newProduct ,categoryName:selectedCategory})
+      updateProduct({ productId: editId, productName: newProduct ,categoryName:selectedCategory,price:price})
     ).then(() => setEditMode(false));
     handleCloseModal();
   };
 
-  const handleEditProduct = (id, name,category) => {
+  const handleEditProduct = (id, name,category,price) => {
     setEditId(id);
     handleShowModal();
     setNewProduct(name);
     setSelectedCategory(category)
+    setPrice(price)
     setEditMode(true);
   };
 
@@ -81,6 +83,7 @@ const Product = () => {
           <tr>
             <th>Product</th>
             <th>Category</th>
+            <th>Price</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -89,11 +92,12 @@ const Product = () => {
             <tr key={index}>
               <td>{product.productName}</td>
               <td> {product.categoryName}</td>
+              <td> {product.price}</td>
               <td>
                 <Button
                   variant="info"
                   onClick={() =>
-                    handleEditProduct(product._id, product.productName,product.categoryName)
+                    handleEditProduct(product._id, product.productName,product.categoryName,product.price)
                   }
                 >
                   Edit
@@ -141,6 +145,13 @@ const Product = () => {
                 placeholder="Enter product name"
                 value={newProduct}
                 onChange={(e) => setNewProduct(e.target.value)}
+              />
+               <Form.Label>Product price</Form.Label>
+               <Form.Control
+                type="text"
+                placeholder="Enter product price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </Form.Group>
           </Form>
