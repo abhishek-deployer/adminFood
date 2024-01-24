@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './category.css';
 import { Modal, Button, Table, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategory, deleteCategory, fetchCategories } from '../../redux/categorySlice';
+import { addCategory, deleteCategory, fetchCategories, updateCategory } from '../../redux/categorySlice';
 import axios from 'axios';
 const Category = () => {
   const dispatch=useDispatch()
@@ -12,7 +12,12 @@ const Category = () => {
   const [newCategory, setNewCategory] = useState('');
   const [editCategory, setEditCategory] = useState(null);
   const [categoryList,setCategoryList]=useState([])
-  const handleShowModal = () => setShowModal(true);
+  const [editMode,setEditMdoe]=useState(false)
+  const [editId,setEditId]=useState()
+  const handleShowModal = () =>{
+    setShowModal(true)
+    setEditMdoe(false)
+  };
   const handleCloseModal = () => {
     setShowModal(false);
     setNewCategory('');
@@ -23,12 +28,19 @@ const Category = () => {
     dispatch(addCategory(newCategory));
     handleCloseModal();
   };
+  const handleEditCategorySave = () => {
+    console.log(newCategory)
+    dispatch(updateCategory({categoryId:editId, categoryName:newCategory })).then(()=>setEditMdoe(false))
+
+    handleCloseModal();
+  };
   
 
-  const handleEditCategory = (index) => {
-    setEditCategory(index);
-    setNewCategory(categories[index].name);
+  const handleEditCategory = (id,name) => {
+    setEditId(id)
     handleShowModal();
+    setNewCategory(name)
+    setEditMdoe(true)
   };
 
   const handleDeleteCategory = (id) => {
@@ -62,7 +74,7 @@ const Category = () => {
               <td>{category.categoryName}</td>
               <td> {/* Add image column if needed */}</td>
               <td>
-                <Button variant="info" onClick={() => handleEditCategory(index)}>
+                <Button variant="info" onClick={() => handleEditCategory(category._id,category.categoryName)}>
                   Edit
                 </Button>
                 <Button variant="danger" onClick={() => handleDeleteCategory(category._id)}>
@@ -96,9 +108,10 @@ const Category = () => {
           <Button variant="secondary" onClick={handleCloseModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSaveCategory}>
-            Save Category
-          </Button>
+          <Button variant="primary" onClick={editMode ? handleEditCategorySave : handleSaveCategory}>
+  {editMode ? 'Update Category' : 'Save Category'}
+</Button>
+
         </Modal.Footer>
       </Modal>
     </div>

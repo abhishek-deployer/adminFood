@@ -22,7 +22,7 @@ export const deleteCategory = createAsyncThunk('category/deleteCategory', async 
 
 // Define an async thunk for updating a category by ID
 export const updateCategory = createAsyncThunk('category/updateCategory', async ({ categoryId, categoryName }) => {
-  const response = await axios.put(`http://localhost:8000/admin/categories/${categoryId}`, { categoryName });
+  const response = await axios.put(`http://localhost:8000/admin/update/${categoryId}`, { categoryName });
   return response.data;
 });
 

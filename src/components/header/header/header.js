@@ -24,11 +24,10 @@ const Header = () => {
           onClick={handleToggle}
         />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link >Categories</Nav.Link>
-            <Nav.Link >Product</Nav.Link>
-           
-          </Nav>
+        <Nav className="mr-auto">
+      <Link to="/category" className="nav-link">Categories</Link>
+      <Link to="/product" className="nav-link">Product</Link>
+    </Nav>
           <Nav></Nav>
         </Navbar.Collapse>
       </Container>
