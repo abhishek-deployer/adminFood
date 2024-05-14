@@ -74,7 +74,7 @@ const Product = () => {
       <div className="product-header">
         <h2>Product</h2>
         <Button variant="primary" onClick={handleShowModal}>
-          Add Product
+          Add Products
         </Button>
       </div>
 
